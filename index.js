@@ -1,4 +1,5 @@
 const express = require('express');
+const booksRouter = express.Router();
 
 const app = express(); // its working
 const products = ['Apple','Pen','Computer'];
@@ -19,6 +20,16 @@ app.get('/products/:id', (req, res, next) => {
 		res.status(404).send('Product not found');
 	}
 });
+
+booksRouter.get('/', (req,res) => {
+	res.send('Books');
+})
+
+booksRouter.get('/about', (req, res) => {
+  res.send('About books');
+});
+
+app.use('/books', booksRouter);
 
 app.listen(5000, () => {
 	console.log('Its started', new Date());
