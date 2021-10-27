@@ -4,6 +4,8 @@ const express = require('express');
 const app = express(); // its working
 const products = ['Apple', 'Pen', 'Computer'];
 
+// app.use(express.static('public'));
+
 app.use('/static', express.static(__dirname + '/public'));
 
 app.get('/', (req, res, next) => {
