@@ -38,8 +38,12 @@ app.get('/products/:id', (req, res, next) => {
 
 // app.use('/books', booksRouter);
 
+// app.get('/downloadBooks', (req, res, next) => {
+//   res.download('./public/books.html');
+// });
+
 app.get('/downloadBooks', (req, res, next) => {
-  res.dounload('./public/books.html', 'anothername', (err) => {
+  res.download('./public/books.html', 'anothername', (err) => {
     console.log('File sent');
   });
 });
