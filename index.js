@@ -44,11 +44,11 @@ app.get('/products/:id', (req, res, next) => {
 //   res.download('./public/books.html');
 // });
 
-app.get('/downloadBooks', (req, res, next) => {
-  res.download('./public/books.html', 'anothername', (err) => {
-    console.log('File sent');
-  });
-});
+// app.get('/downloadBooks', (req, res, next) => {
+//   res.download('./public/books.html', 'anothername', (err) => {
+//     console.log('File sent');
+//   });
+// });
 
 // app.get('/blog', (req, res, next) => {
 // 	res.redirect('https://akhromieiev.com');
