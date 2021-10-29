@@ -6,7 +6,13 @@ const products = ['Apple', 'Pen', 'Computer'];
 
 // app.use(express.static('public'));
 
-app.use('/static', express.static(__dirname + '/public'));
+// app.use('/static', express.static(__dirname + '/public'));
+
+app.use((req, res, next) => {
+  console.log('Date', new Date(), 'Method', req.method, 
+  			  'URL', req.originalUrl, 'IP', req.ip);
+  next();
+});
 
 app.get('/', (req, res, next) => {
   res.send('Its working');
