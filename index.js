@@ -64,6 +64,11 @@ app.get('/blog', (req, res, next) => {
   res.redirect(301, '/');
 });
 
+app.use((err, req, res, next) => {
+	console.log(err.stack);
+	res.status(500).send(err.stack);
+});
+
 app.listen(5000, () => {
   console.log('Its started', new Date());
 });
