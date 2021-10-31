@@ -2,7 +2,10 @@ const express = require('express');
 
 const app = express(); // its working
 const products = ['Apple', 'Pen', 'Computer'];
-app.set('view engine', 'pug');
+
+// pug
+// app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 app.set('views', './views');
 
 app.use('/static', express.static(__dirname + '/public'));
@@ -38,7 +41,16 @@ app.get('/main', (req, res, next) => {
   res.render('main', {
     title: 'Products',
     message: 'Products List',
-    products: products,
+    products: products
+  });
+});
+
+// ejs
+app.get('/ejs', (req, res, next) => {
+  res.render('main', {
+    title: 'Products',
+    message: 'Products List',
+    products: products
   });
 });
 
