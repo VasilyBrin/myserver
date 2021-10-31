@@ -1,18 +1,11 @@
 const express = require('express');
-// const booksRouter = express.Router();
 
 const app = express(); // its working
 const products = ['Apple', 'Pen', 'Computer'];
+app.set('view engine', 'pug');
+app.set('views', './views');
 
-// app.use(express.static('public'));
-
-// app.use('/static', express.static(__dirname + '/public'));
-
-app.use((req, res, next) => {
-  console.log('Date', new Date(), 'Method', req.method, 
-  			  'URL', req.originalUrl, 'IP', req.ip);
-  next();
-});
+app.use('/static', express.static(__dirname + '/public'));
 
 app.get('/', (req, res, next) => {
   res.send('Its working');
@@ -23,11 +16,6 @@ app.get('/products', (req, res, next) => {
   // res.json({products});
 });
 
-// app.get('/products', (req, res, next) => {
-// 	console.log('Page', req.query.page);
-// 	res.send(products);
-// });
-
 app.get('/products/:id', (req, res, next) => {
   if (products[req.params.id]) {
     res.send(products[req.params.id]);
@@ -36,37 +24,27 @@ app.get('/products/:id', (req, res, next) => {
   }
 });
 
-// booksRouter.get('/', (req,res) => {
-// 	res.send('Books');
-// })
-
-// booksRouter.get('/about', (req, res) => {
-//   res.send('About books');
-// });
-
-// app.use('/books', booksRouter);
-
-// app.get('/downloadBooks', (req, res, next) => {
-//   res.download('./public/books.html');
-// });
-
-// app.get('/downloadBooks', (req, res, next) => {
-//   res.download('./public/books.html', 'anothername', (err) => {
-//     console.log('File sent');
-//   });
-// });
-
-// app.get('/blog', (req, res, next) => {
-// 	res.redirect('https://akhromieiev.com');
-// });
+app.get('/downloadBooks', (req, res, next) => {
+  res.download('./public/books.html', 'anothername', (err) => {
+    console.log('File sent');
+  });
+});
 
 app.get('/blog', (req, res, next) => {
   res.redirect(301, '/');
 });
 
+app.get('/main', (req, res, next) => {
+  res.render('main', {
+    title: 'Products',
+    message: 'Products List',
+    products: products,
+  });
+});
+
 app.use((err, req, res, next) => {
-	console.log(err.stack);
-	res.status(500).send(err.stack);
+  console.log(err.stack);
+  res.status(500).send(err.stack);
 });
 
 app.listen(5000, () => {
