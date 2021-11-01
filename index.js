@@ -5,7 +5,10 @@ const products = ['Apple', 'Pen', 'Computer'];
 
 // pug
 // app.set('view engine', 'pug');
-app.set('view engine', 'ejs');
+// ejs
+// app.set('view engine', 'ejs');
+
+app.set('view engine', 'hbs');
 app.set('views', './views');
 
 app.use('/static', express.static(__dirname + '/public'));
@@ -37,8 +40,11 @@ app.get('/blog', (req, res, next) => {
   res.redirect(301, '/');
 });
 
+// pug
 app.get('/main', (req, res, next) => {
   res.render('main', {
+    layout: false
+  }, {
     title: 'Products',
     message: 'Products List',
     products: products
@@ -48,6 +54,15 @@ app.get('/main', (req, res, next) => {
 // ejs
 app.get('/ejs', (req, res, next) => {
   res.render('main', {
+    title: 'Products',
+    message: 'Products List',
+    products: products
+  });
+});
+
+// hbs
+app.get('/hbs', (req, res, next) => {
+  res.render('main.hbs', {
     title: 'Products',
     message: 'Products List',
     products: products
